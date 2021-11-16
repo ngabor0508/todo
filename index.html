@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="toggleAdd">Add</button>
+        <div v-if="showAdd">
+            <p>{{tanar.nev}}</p>
+            <p>Név: <input v-model="tanar.nev" type="text"></p>
+            <p>Kép: <input v-model="tanar.kep" type="text"></p>
+            <button v-on:click="save">Save</button>
+        </div>
+        <div v-for="tanar in tanarok">
+            <p>{{tanar.nev}}</p>
+            <img v-if="tanar.kep != ''" v-bind:src="tanar.kep" width="100%">
+            <img v-if="tanar.kep == ''" src="data:image/jpeg;base64,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">
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            methods: {
+                toggleAdd(){
+                    this.showAdd = !this.showAdd
+                } 
+            },
+            data: {
+                tanar: {
+                    nev: '',
+                    kep: '',
+                },
+                showAdd: true,
+                show: true,
+                tanarok: [
+                    {
+                        nev: 'Egyik kutya',
+                        kep: 'https://lh3.googleusercontent.com/proxy/C2MoDUaFZ30fbhjBvlZd_28czJQjPQmvlkgJoZB-G9XfSo-s-5JKsJiD8GMNeCwkZ_GiZH0v9I6PN99tN4FDo37u2sAhttg5Cvn5Ka42MLeF3G2BBA'
+                    },
+                    {
+                        nev: 'Másik kutyus',
+                        kep: 'https://nlc.p3k.hu/uploads/2020/03/rottw.jpg'
+                    },
+                    {
+                        nev: 'Alvo kutya',
+                        kep: ''
+                    },
+                ],
+            },
+            methods: {
+                toggleAdd(){
+                    this.showAdd = !this.showAdd
+                },
+                save(){
+                    this.tanarok.push({...this.tanar});
+                }
+            },
+        })
+    </script>
+</body>
+</html>
